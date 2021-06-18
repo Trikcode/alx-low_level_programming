@@ -16,13 +16,9 @@ int main(void)
 		d++;
 	}
 
-
-	char c = 'a';
-
-	while (c <= 'f')
+	for (char c = 'a'; c <= 'f'; c++)
 	{
 		putchar(c);
-		c++;
 	}
 
 	putchar('\n');
