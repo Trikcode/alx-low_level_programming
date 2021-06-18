@@ -1,12 +1,11 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 /**
- *main - entry point
- *Description: is it positive or negative
- *  Return:(0)
+ * main - entry point
+ * Description: prints "is it positive or negative"
+ * Return: 0
  */
-
-/* betty style doc for function main goes there */
 int main(void)
 {
 	int n;
