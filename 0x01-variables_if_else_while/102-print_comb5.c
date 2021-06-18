@@ -41,9 +41,9 @@ while (f < 10)
 			}
 			d++;
 		}
-		e++;
+		f++;
 	}
-	f++;
+	e++;
 }
 putchar('\n');
 return (0);
