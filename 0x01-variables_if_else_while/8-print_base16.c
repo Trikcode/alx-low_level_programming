@@ -8,6 +8,7 @@
  */
 int main(void)
 {
+	char c;
 	char d = '0';
 
 	while (d <= '9')
@@ -16,7 +17,7 @@ int main(void)
 		d++;
 	}
 
-	for (char c = 'a'; c <= 'f'; c++)
+	for (c = 'a'; c <= 'f'; c++)
 	{
 		putchar(c);
 	}
