@@ -2,7 +2,7 @@
 #include <math.h>
 /**
  * main - prime numbers
- *
+ * Description - prime factor
  * Return: Always 0.
  */
 int main(void)
