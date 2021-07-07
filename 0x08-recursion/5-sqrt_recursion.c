@@ -5,11 +5,19 @@
  * @n: int
  * Return: int
  */
-
+int square(int n, int val);
 int _sqrt_recursion(int n)
 {
-return (square(n, 1));
+	int sq = 2;
+
+	if (n < 0)
+		return (-1);
+	else if (n == 0 || n == 1)
+		return (n);
+	return (square(n, sq));
 }
+
+
 
 /**
  * square - find square root
@@ -29,3 +37,4 @@ else
 	return (-1);
 
 }
+
