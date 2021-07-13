@@ -1,52 +1,36 @@
+#include "holberton.h"
 #include <stdlib.h>
-#include <stdio.h>
-
 /**
- * _strlen - find length of a string
- * @s: string
- * Return: int
+ * argstostr - Concatenates all arguments of the program into a string;
+ * arguments are separated by a new line in the string.
+ * @ac: The number of arguments passed to the program.
+ * @av: An array of pointers to the arguments.
+ *
+ * Return: If ac == 0, av == NULL, or the function fails - NULL.
+ * Otherwise - a pointer to the new string.
  */
-
-
-int _strlen(char *s)
-{
-int size = 0;
-for (; s[size] != '\0'; size++)
-;
-return (size);
-}
-
-/**
- * *argstostr - description
- * @ac: int
- * @av: arguments
- * Return: string
- */
-
 char *argstostr(int ac, char **av)
 {
-int i = 0, nc = 0, j = 0, cmpt = 0;
-char *s;
+	char *str;
+	int arg, byte, index, size = ac;
 
-if (ac == 0 || av == NULL)
-	return (NULL);
-
-for (; i < ac; i++, nc++)
-	nc += _strlen(av[i]);
-
-s = malloc(sizeof(char) * nc + 1);
-if (s == 0)
-	return (NULL);
-
-for (i = 0; i < ac; i++)
-{
-	for (j = 0; av[i][j] != '\0'; j++, cmpt++)
-		s[cmpt] = av[i][j];
-
-	s[cmpt] = '\n';
-	cmpt++;
-}
-s[cmpt] = '\0';
-
-return (s);
+	if (ac == 0 || av == NULL)
+		return (NULL);
+	for (arg = 0; arg < ac; arg++)
+	{
+		for (byte = 0; av[arg][byte]; byte++)
+			size++;
+	}
+	str = malloc(sizeof(char) * size + 1);
+	if (str == NULL)
+		return (NULL);
+	index = 0;
+	for (arg = 0; arg < ac; arg++)
+	{
+		for (byte = 0; av[arg][byte]; byte++)
+			str[index++] = av[arg][byte];
+		str[index++] = '\n';
+	}
+	str[size] = '\0';
+	return (str);
 }
