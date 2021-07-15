@@ -34,6 +34,5 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 		strDup[i] = s2[j];
 		i++, j++;
 	}
-	strDup[i] = '\0';
 	return (strDup);
 }
