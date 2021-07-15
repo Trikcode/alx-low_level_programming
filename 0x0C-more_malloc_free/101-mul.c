@@ -1,91 +1,132 @@
 #include "holberton.h"
+#include <stdio.h>
 
 /**
- * _puts - prints a string, followed by a new line,
- * @str: pointer to the string to print
- * Return: void
-*/
-
-
-void _puts(char *str)
-{
-int i = 0;
-while (str[i])
-{
-	_putchar(str[i]);
-	i++;
-}
-
-}
-
-/**
- * _atoi - convert a string to an integer.
- * @s: char type string
- * Return: integer converted
+ * main - multiplies two positive numbers
+ * @argc: argument count
+ * @argv: argument vectors
+ * Return: 0
  */
-
-int _atoi(const char *s)
+void multiply(char *f, char *s);
+int onlyNumbers(char *c);
+int _strlen(char *s);
+int main(int argc, char *argv[])
 {
-    int sign = 1;
-	unsigned long int resp = 0, firstNum, i;
+	char *f = argv[1];
+	char *s = argv[2];
 
-	for (firstNum = 0; !(s[firstNum] >= 48 && s[firstNum] <= 57); firstNum++)
+	if (argc != 3 || !onlyNumbers(f) || !onlyNumbers(s))
 	{
-		if (s[firstNum] == '-')
+		printf("Error\n");
+		exit(98);
+	}
+	if (*f == 48 || *s == 48)
+		printf("0\n");
+	else
+		multiply(s, f);
+	return (0);
+}
+
+/**
+ * multiply - multiplies two numbers and displays it
+ * @f: first "number"
+ * @s: second "number"
+ */
+void multiply(char *f, char *s)
+{
+	int i, len1, len2, total, fdigit, sdigit, res = 0, tmp;
+	int *ptr;
+
+	len1 = _strlen(f);
+	len2 = _strlen(s);
+	tmp = len2;
+	total = len1 + len2;
+	ptr = _calloc(sizeof(int), (len1 + len2));
+	for (len1--; len1 >= 0; len1--)
+	{
+		fdigit = f[len1] - '0';
+		res = 0;
+		len2 = tmp;
+		for (len2--; len2 >= 0; len2--)
 		{
-			sign *= -1;
+			sdigit = s[len2] - '0';
+			res += ptr[len2 + len1 + 1] + (fdigit * sdigit);
+			ptr[len1 + len2 + 1] = res % 10;
+			res /= 10;
 		}
+		if (res)
+			ptr[len1 + len2 + 1] = res % 10;
 	}
-
-	for (i = firstNum; s[i] >= 48 && s[i] <= 57; i++)
+	while (*ptr == 0)
 	{
-		resp *= 10;
-		resp += (s[i] - 48);
+		ptr++;
+		total--;
 	}
-
-	return (sign * resp);
+	for (i = 0; i < total; i++)
+		printf("%i", ptr[i]);
+	printf("\n");
+}
+/**
+ * onlyNumbers - determines if string has only numbers
+ * @c: input string
+ * Return: 0 if false, 1 if true
+ */
+int onlyNumbers(char *c)
+{
+	while (*c)
+	{
+		if (*c < '0' || *c > '9')
+			return (0);
+		c++;
+	}
+	return (1);
 }
 
 /**
- * print_int - prints an integer.
- * @n: int
- * Return: 0
+ * _strlen - returns the length of a string
+ * @s: string s
+ * Return: length of string
  */
-
-void print_int(unsigned long int n)
+int _strlen(char *s)
 {
+	char *p = s;
 
-unsigned  long int divisor = 1, i, resp;
-
-for (i = 0; n / divisor > 9; i++, divisor *= 10)
-;
-
-for (; divisor >= 1; n %= divisor, divisor /= 10)
-{
-	resp = n / divisor;
-	_putchar('0' + resp);
-}
-
+	while (*s)
+		s++;
+	return (s - p);
 }
 
 /**
- * main - print the result of the multiplication, followed by a new line
- * @argc: int
- * @argv: list
- * Return: 0
+ * _memset - fills memory with a constant byte
+ * @s: memory area
+ * @b: constant byte
+ * @n: bytes of the memory area
+ * Return: pointer to the memory area s
  */
-
-int main(int argc, char const *argv[])
+char *_memset(char *s, char b, unsigned int n)
 {
-(void)argc;
+	char *ptr = s;
 
-if (argc != 3)
-{
-	_puts("Error ");
-	exit(98);
+	while (n--)
+		*s++ = b;
+	return (ptr);
 }
-print_int(_atoi(argv[1]) * _atoi(argv[2]));
-_putchar('\n');
 
-return (0);
+/**
+ * _calloc - allocates memory for an array, using malloc
+ * @nmemb: number of elements of pointer
+ * @size: size of each member
+ * Return: pointer of allocated memory
+ */
+void *_calloc(unsigned int nmemb, unsigned int size)
+{
+	void *ptr;
+
+	if (!nmemb || !size)
+		return (NULL);
+	ptr = malloc(size * nmemb);
+	if (!ptr)
+		return (NULL);
+	_memset(ptr, 0, size * nmemb);
+	return (ptr);
 }
