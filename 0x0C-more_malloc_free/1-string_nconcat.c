@@ -1,47 +1,52 @@
 #include "holberton.h"
-#include <stdlib.h>
-#include <stdio.h>
+
 /**
- * string_nconcat - concatenates two strings
- * @s1: pointer to first string.
- * @s2: pointer to 2nd string.
- * @n: Number of bytes from n2 to concatenate.
- *
- * Return:Pointer to space in memory containing concatenated string.
+ * _strlen - find length of a string
+ * @s: string
+ * Return: int
  */
+
+unsigned int _strlen(char *s)
+{
+unsigned int size = 0;
+for (; s[size] != '\0'; size++)
+;
+return (size);
+}
+
+/**
+ * *string_nconcat - concatenates two strings
+ * @s1: string 1
+ * @s2: string 2
+ * @n: first bytes of s2 to be used
+ * Return: pointer or NULL
+ */
+
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-	char *str;
-	unsigned int i, j, s1_length, s2_length;
+unsigned int i, j;
+char *m;
 
-/*Check if the strings passed are null*/
-	if (s1 == NULL)
-		s1 = "";
-	if (s2 == NULL)
-		s2 = "";
-/*Compute the length of the strings*/
+if (s1 == NULL)
+	s1 = "";
+if (s2 == NULL)
+	s2 = "";
 
-	for (s1_length = 0; s1[s1_length] != '\0'; s1_length++)
-		;
+if (n < _strlen(s2))
+	m = malloc(_strlen(s1) + n * sizeof(char) + 1);
+else
+	m = malloc(_strlen(s1) + _strlen(s2) + 1);
 
-	for (s2_length = 0; s2[s2_length] != '\0'; s2_length++)
-		;
-/*Memory reservation-for case 1 & 2.*/
-	str = malloc(s1_length + n + 1);
-	if (str == NULL)
-	{
-		return (NULL);
-	}
-/*Copy first string into str.*/
-	for (i = 0; s1[i] != '\0'; i++)
-		str[i] = s1[i];
-/*copy second stringg into str.*/
-	for (j = 0; j < n; j++)
-	{
-		str[i] = s2[j];
-		i++;
-	}
+if (m == 0)
+	return (NULL);
 
-	str[i] = '\0';
-	return (str);
+for (i = 0; s1[i] != '\0'; i++)
+	m[i] = s1[i];
+
+for (j = 0; s2[j] != '\0' && j < n; i++, j++)
+	m[i] = s2[j];
+
+m[i] = '\0';
+
+return (m);
 }
