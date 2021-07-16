@@ -32,7 +32,7 @@ void *m;
 if (size == 0 || nmemb == 0)
 	return (NULL);
 
-m = malloc(size * (nmemb + 1));
+m = malloc(size * nmemb);
 
 if (m == 0)
 	return (NULL);
