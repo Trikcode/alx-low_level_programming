@@ -36,17 +36,16 @@ if (n < _strlen(s2))
 	m = malloc(_strlen(s1) + sizeof(char) * (n + 1));
 else
 	m = malloc(_strlen(s1) + _strlen(s2) + 1);
-
-if (m == 0)
+n = 0;
+if (m == NULL)
 	return (NULL);
-
 for (i = 0; s1[i] != '\0'; i++)
-	m[i] = s1[i];
+	m[n++] = s1[i];
 
 for (j = 0; s2[j] != '\0' && j < n; i++, j++)
-	m[i] = s2[j];
+	m[n++] = s2[j];
 
-m[i] = '\0';
+m[n] = '\0';
 
 return (m);
 }
