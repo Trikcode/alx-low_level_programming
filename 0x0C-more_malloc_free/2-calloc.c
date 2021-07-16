@@ -31,8 +31,7 @@ void *m;
 
 if (size == 0 || nmemb == 0)
 	return (NULL);
-
-m = malloc(sizeof(int) * nmemb + 1);
+m = (int*)malloc(sizeof(int) * nmemb + 1);
 
 if (m == 0)
 	return (NULL);
