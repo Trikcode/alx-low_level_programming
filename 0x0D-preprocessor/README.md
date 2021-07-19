@@ -1,2 +1,2 @@
 # Prepocessor
-<h3> Prepocessor directives </h3>
+<h3> All Prepocessor directives </h3>
